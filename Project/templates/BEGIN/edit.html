@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Row</title>
+</head>
+<body>
+    <h1>Edit Row</h1>
+    <form method="post" action="{{ url_for('edit_row',username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+        <input type="hidden" name="table" value="{{ row_data['table'] }}">
+        <input type="hidden" name="pk" value="{{ row_data['pk'] }}">
+        <input type="hidden" name="id" value="{{ row_data[row_data['pk']] }}">
+        <label for="AADHAR_NO">AADHAR_NO:</label>
+        <input type="text" id="AADHAR_NO" name="AADHAR_NO" value="{{ row_data['AADHAR_NO'] }}"><br><br>
+        <label for="NAME">NAME:</label>
+        <input type="text" id="NAME" name="NAME" value="{{ row_data['NAME'] }}"><br><br>
+        <label for="CARD_NUMBER">CARD_NUMBER:</label>
+        <input type="text" id="CARD_NUMBER" name="CARD_NUMBER" value="{{ row_data['CARD_NUMBER'] }}"><br><br>
+        <label for="OCCUPATION">OCCUPATION:</label>
+        <input type="text" id="OCCUPATION" name="OCCUPATION" value="{{ row_data['OCCUPATION'] }}"><br><br>
+        <label for="CONTACT">CONTACT:</label>
+        <input type="text" id="CONTACT" name="CONTACT" value="{{ row_data['CONTACT'] }}"><br><br>
+        <label for="MAIL">MAIL:</label>
+        <input type="text" id="EMAIL" name="EMAIL" value="{{ row_data['EMAIL'] }}"><br><br>
+        <label for="VILLAGE_CODE">VILLAGE_CODE:</label>
+        <input type="text" id="VILLAGE_CODE" name="VILLAGE_CODE" value="{{ row_data['VILLAGE_CODE'] }}"><br><br>
+        <label for="ADDRESS">ADDRESS:</label>
+        <input type="text" id="ADDRESS" name="ADDRESS" value="{{ row_data['ADDRESS'] }}"><br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

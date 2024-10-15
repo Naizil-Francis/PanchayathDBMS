@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        body {
+            background-color: #ffe; /* Very light blue background */
+        }
+        .navbar {
+            background-color: #000 !important; /* Black navbar */
+        }
+        .navbar-text {
+            color: #fff !important; /* White text in navbar */
+        }
+        #submitButton {
+            background-color: #000 !important; /* Black submit button */
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{{ url_for('employee_main', username=username) }}">HOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('employee_edit', username=username) }}">Edit Details</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('viewforms', username=username) }}">View Forms</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('viewAcceptedForms', username=username) }}" active >Accepted Applications</a>
+            </li>
+        </ul>
+        <span class="navbar-text mr-3">
+            Welcome, {{ username }}
+        </span>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="logout()">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h3 class="text-center">Submitted Applications</h3>
+    <br>
+    <div id="message" class="alert" role="alert" style="display: none;"></div>
+    <form id="applicationForm" method="POST" action="{{url_for('change_form', username=username)}}">
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Aadhaar Number</th>
+                <th>Scheme ID</th>
+                <th>Application Number</th>
+                <th>Status</th>
+                <th>Date of Applying</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in register %}
+            <tr>
+                <td>{{ form.AADHAR_NO }}</td>
+                <td>{{ form.SCHEME_ID }}</td>
+                <td>{{ form.APPLICATION_NO }}</td>
+                <td>
+                    <select class="form-control" name="status[]">
+                        <option value="" selected disabled>select</option>
+                        <option value="Pending" {% if form.STATUS == 'Pending' %} selected {% endif %}>Pending</option>
+                        <option value="Approved" {% if form.STATUS == 'Approved' %} selected {% endif %}>Approved</option>
+                        <option value="Rejected" {% if form.STATUS == 'Rejected' %} selected {% endif %}>Rejected</option>
+                    </select>
+                </td>
+                <input type="hidden" name="application_number[]" value="{{ form.APPLICATION_NO }}">
+                <td>{{ form.DATE }}</td>
+                <td><a href="{{ url_for('getUserData',app_no=form.AADHAR_NO) }}" class="btn btn-primary">Get Details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <hr>
+</div>
+<script>
+  function logout() {
+    alert("Logged out"); // Display message
+    window.location.href = "/"; // Redirect to index.php
+  }
+</script>
+</body>
+</html>

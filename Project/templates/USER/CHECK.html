@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0faff; /* Very light blue background */
+        }
+        .navbar {
+            background-color: #007bff !important; /* Blue navbar */
+        }
+        .application-item {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<script>
+  function lO() {
+    alert("Logged out"); // Display message
+    window.location.href = "/"; // Redirect to index.php
+  }
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('user_main', username=username) }}">HOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_apply', username=username) }}">New Application</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_edit', username=username) }}">Edit Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" active >My Applications</a>
+            </li>
+        </ul>
+        <span class="navbar-text mr-3">
+            Welcome, {{ username }} <!-- Display the username -->
+        </span>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-danger my-2 my-sm-0 " type="button" onclick="lO()">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h3 class="text-center">My Applications</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Application Number</th>
+                <th>Scheme ID</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.APPLICATION_NO }}</td>
+                <td>{{ application.SCHEME_ID }}</td>
+                <td>{{ application.STATUS }}</td>
+                <td>{{ application.DATE }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('dlt_appl') }}">
+                        <input type="hidden" name="username" value="{{ username }}">
+                        <input type="hidden" name="applicationNo" value="{{ application.APPLICATION_NO }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

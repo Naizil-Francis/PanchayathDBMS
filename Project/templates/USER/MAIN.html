@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Application Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #fff; /* Very light blue background */
+        }
+        .navbar {
+            background-color: #007bff !important; /* Blue navbar */
+        }
+        /* Adjust table cell width */
+        table th, table td {
+            min-width: 100px; /* Adjust as needed */
+        }
+        /* Make description column scrollable */
+        .description-cell {
+            max-width: 200px; /* Adjust as needed */
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+        
+<script>
+  function lO() {
+    alert("Logged out"); // Display message
+    window.location.href = "/"; // Redirect to index.php
+  }
+  function st()
+    {
+        alert("Logged in as user");
+    }
+    window.onload=st();
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">HOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_apply', username=username) }}"">New Application</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_edit', username=username) }}">Edit Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_app_check', username=username) }}">My Applications</a>
+            </li>
+        </ul>
+        <span class="navbar-text mr-3">
+            Welcome {{ username }}
+        </span>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="lO()">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h3 class="text-center">User Dashboard</h3>
+    <br><br>
+    <h4 align='center'>List of Schemes Available</h4>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Scheme ID</th>
+                    <th>Scheme Name</th>
+                    <th>Domain</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scheme in schemes %}
+                    <tr>
+                        <td>{{ scheme[0] }}</td>
+                        <td>{{ scheme[1] }}</td>
+                        <td class="description-cell">{{ scheme[2] }}</td>   
+                        <td class="description-cell">{{ scheme[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br><br>
+</body>
+</html>

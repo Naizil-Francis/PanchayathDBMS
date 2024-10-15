@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href={{url_for('static',filename='css/styles.css')}}>
+    <title>Viewing 7 Tabled Lists</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: black; /* Set text color to black */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Viewing ALL Tables</h1>
+    <div class="container mt-5">
+        <h3 class="text-center">USER DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>AADHAR_NO</th>
+                        <th>NAME</th>
+                        <th>CARD_NUMBER</th>
+                        <th>OCCUPATION</th>
+                        <th>CONTACT</th>
+                        <th>EMAIL</th>
+                        <th>VILLAGE_CODE</th>
+                        <th>ADDRESS</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t2 %}
+                        <tr>
+                            <td>{{ op.AADHAR_NO }}</td>
+                            <td>{{ op.NAME }}</td>
+                            <td>{{ op.CARD_NUMBER }}</td>
+                            <td>{{ op.OCCUPATION }}</td>
+                            <td>{{ op.CONTACT }}</td>
+                            <td>{{ op.EMAIL }}</td>
+                            <td>{{ op.VILLAGE_CODE }}</td>
+                            <td>{{ op.ADDRESS }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="USER">
+                                            <input type="hidden" name="pk" value="AADHAR_NO">
+                                            <input type="hidden" name="id" value="{{ op['AADHAR_NO'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="USER">
+                                            <input type="hidden" name="pk" value="AADHAR_NO">
+                                            <input type="hidden" name="id" value="{{ op['AADHAR_NO'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+    <div class="container mt-5">
+        <h3 class="text-center">PANCHAYATH DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>VILLAGE_CODE</th>
+                        <th>PINCODE</th>
+                        <th>VILLAGE_ADDRESS</th>
+                        <th>VILLAGE_NAME</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t1 %}
+                        <tr>
+                            <td>{{ op.VILLAGE_CODE }}</td>
+                            <td>{{ op.PINCODE }}</td>
+                            <td>{{ op.VILLAGE_ADDRESS }}</td>
+                            <td>{{ op.VILLAGE_NAME }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="PANCHAYATH">
+                                            <input type="hidden" name="pk" value="VILLAGE_CODE">
+                                            <input type="hidden" name="id" value="{{ op['VILLAGE_CODE'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="PANCHAYATH">
+                                            <input type="hidden" name="pk" value="VILLAGE_CODE">
+                                            <input type="hidden" name="id" value="{{ op['VILLAGE_CODE'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container mt-5">
+        <h3 class="text-center">EMPLOYEE DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>EMPLOYEE_ID</th>
+                        <th>EMPLOYEE_NAME</th>
+                        <th>CONATCT</th>
+                        <th>EMAIL</th>
+                        <th>ADDRESS</th>
+                        <th>op.VILLAGE_CODE</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t3 %}
+                        <tr>
+                            <td>{{ op.EMPLOYEE_ID }}</td>
+                            <td>{{ op.EMPLOYEE_NAME }}</td>
+                            <td>{{ op.CONTACT }}</td>
+                            <td>{{ op.EMAIL }}</td>
+                            <td>{{ op.ADDRESS }}</td>
+                            <td>{{ op.VILLAGE_CODE }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="EMPLOYEE">
+                                            <input type="hidden" name="pk" value="EMPLOYEE_ID">
+                                            <input type="hidden" name="id" value="{{ op['EMPLOYEE_ID'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="EMPLOYEE">
+                                            <input type="hidden" name="pk" value="EMPLOYEE_ID">
+                                            <input type="hidden" name="id" value="{{ op['EMPLOYEE_ID'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>  
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container mt-5">
+        <h3 class="text-center">SCHEME DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SCHEME_ID</th>
+                        <th>SCHEME_NAME</th>
+                        <th>DOMAIN</th>
+                        <th>DESCRIPTION</th>
+                        <th>EMPLOYEE_ID</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t5 %}
+                        <tr>
+                            <td>{{ op.SCHEME_ID }}</td>
+                            <td>{{ op.SCHEME_NAME }}</td>
+                            <td>{{ op.DOMAIN }}</td>
+                            <td>{{ op.DESCRIPTION }}</td>
+                            <td>{{ op.EMPLOYEE_ID }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="SCHEME">
+                                            <input type="hidden" name="pk" value="SCHEME_ID">
+                                            <input type="hidden" name="id" value="{{ op['SCHEME_ID'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="SCHEME">
+                                            <input type="hidden" name="pk" value="SCHEME_ID">
+                                            <input type="hidden" name="id" value="{{ op['SCHEME_ID'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container mt-5">
+        <h3 class="text-center">SCHEME OPTIONS DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SCHEME_ID</th>
+                        <th>VILLAGE_CODE</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t7 %}
+                        <tr>
+                            <td>{{ op.SCHEME_ID }}</td>
+                            <td>{{ op.VILLAGE_CODE }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="OPTION">
+                                            <input type="hidden" name="pk" value="SCHEME_ID">
+                                            <input type="hidden" name="id" value="{{ op['SCHEME_ID'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="OPTION">
+                                            <input type="hidden" name="pk" value="SCHEME_ID">
+                                            <input type="hidden" name="id" value="{{ op['SCHEME_ID'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container mt-5">
+        <h3 class="text-center">REGISTERATION DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SCHEME_ID</th>
+                        <th>AADHAR_NO</th>
+                        <th>APPLICATION_NO</th>
+                        <th>VILLAGE_ID</th>
+                        <th>STATUS</th>
+                        <th>DATE</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t6 %}
+                        <tr>
+                            <td>{{ op.SCHEME_ID }}</td>
+                            <td>{{ op.AADHAR_NO }}</td>
+                            <td>{{ op.APPLICATION_NO }}</td>
+                            <td>{{ op.VILLAGE_ID }}</td>
+                            <td>{{ op.STATUS }}</td>
+                            <td>{{ op.DATE }}</td>
+                            <td class="description-cell">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url_for('delete_row',username=username) }}">
+                                            <input type="hidden" name="table" value="REGISTER">
+                                            <input type="hidden" name="pk" value="APPLICATION_NO">
+                                            <input type="hidden" name="id" value="{{ op['APPLICATION_NO'] }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form method="get" action="{{ url_for('edit_row', username=username, table=table, pk=pk, id=id, row_data=row_data) }}">
+                                            <input type="hidden" name="table" value="REGISTER">
+                                            <input type="hidden" name="pk" value="APPLICATION_NO">
+                                            <input type="hidden" name="id" value="{{ op['APPLICATION_NO'] }}">
+                                            <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container mt-5">
+        <h3 class="text-center">USER DETAILS</h3>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>AADHAR_NO</th>
+                        <th>NAME</th>
+                        <th>CARD_NUMBER</th>
+                        <th>OCCUPATION</th>
+                        <th>CONTACT</th>
+                        <th>EMAIL</th>
+                        <th>VILLAGE_CODE</th>
+                        <th>ADDRESS</th>
+                        <th>Action</th> <!-- Column for delete button -->
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in t2 %}
+                        <tr>
+                            <td>{{ op.AADHAR_NO }}</td>
+                            <td>{{ op.NAME }}</td>
+                            <td>{{ op.CARD_NUMBER }}</td>
+                            <td>{{ op.OCCUPATION }}</td>
+                            <td>{{ op.CONTACT }}</td>
+                            <td>{{ op.MAIL }}</td>
+                            <td>{{ op.VILLAGE_CODE }}</td>
+                            <td>{{ op.ADDRESS }}</td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+</body>
+</html>

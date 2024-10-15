@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accepted Applications</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ffe; /* White background */
+        }
+        .navbar {
+            background-color: #000000 !important; /* Black navbar color */
+        }
+        .navbar-text {
+            color: #ffffff !important; /* White text in navbar */
+        }
+        #submitButton {
+            background-color: #000000; /* Black submit button */
+        }
+    </style>
+</head>
+<body>
+<script>
+  function lO() {
+    alert("Logged out"); // Display message
+    window.location.href = "/"; // Redirect to index.php
+  }
+</script>
+
+<div class="container mt-5">
+    <h3 class="text-center">User details</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>AADHAR</th>
+                <th>ADDRESS</th>
+                <th>OCCUPATION</th>
+                <th>CONTACT</th>
+                <th>RATION CARD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ data['NAME'] }}</td>
+                <td>{{ data['AADHAR_NO'] }}</td>
+                <td>{{ data['ADDRESS'] }}</td>
+                <td>{{ data['OCCUPATION'] }}</td>
+                <td>{{ data['CONTACT'] }}</td>
+                <td>{{ data['CARD_NUMBER'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
